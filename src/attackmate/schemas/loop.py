@@ -5,6 +5,7 @@ from attackmate.command import CommandRegistry
 from typing import Literal, Union, Optional, List
 from .sleep import SleepCommand
 from .shell import ShellCommand
+from .vnc import VncCommand
 from .setvar import SetVarCommand
 from .include import IncludeCommand
 from .metasploit import MsfModuleCommand, MsfSessionCommand, MsfPayloadCommand
@@ -45,6 +46,7 @@ Commands = List[
         DebugCommand,
         SetVarCommand,
         RegExCommand,
+        VncCommand,
         TempfileCommand,
         IncludeCommand,
         WebServCommand,
