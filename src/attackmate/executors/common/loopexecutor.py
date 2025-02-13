@@ -36,10 +36,11 @@ class LoopExecutor(BaseExecutor):
     def log_command(self, command: LoopCommand):
         self.logger.info('Looping commands')
 
-    def break_condition_met(self, command: LoopCommand) -> bool:
+    def break_condition_met(self, command: LoopCommand, placeholders) -> bool:
         if not command.break_if:
             return False
-        condition = Template(command.break_if).safe_substitute(**self.varstore.variables)
+        condition = Template(command.break_if).safe_substitute(placeholders)
+
         if Conditional.test(condition):
             self.logger.warning('Breaking out of loop due to condition: %s', command.break_if)
             return True
@@ -65,9 +66,10 @@ class LoopExecutor(BaseExecutor):
                     'LOOP_INDEX': x,
                     **self.varstore.variables,
                 }
-                self.substitute_variables_in_command(template_cmd, placeholders)
-                if self.break_condition_met(command):
+
+                if self.break_condition_met(command, placeholders):
                     return
+                self.substitute_variables_in_command(template_cmd, placeholders)
                 self.runfunc([template_cmd])
 
     def loop_items(self, command: LoopCommand, varname: str, iterable: list[str]) -> None:
@@ -78,9 +80,10 @@ class LoopExecutor(BaseExecutor):
                     'LOOP_ITEM': x,
                     **self.varstore.variables,
                 }
-                self.substitute_variables_in_command(template_cmd, placeholders)
-                if self.break_condition_met(command):
+                
+                if self.break_condition_met(command, placeholders):
                     return
+                self.substitute_variables_in_command(template_cmd, placeholders)
                 self.runfunc([template_cmd])
 
     def loop_until(self, command: LoopCommand, condition: str) -> None:

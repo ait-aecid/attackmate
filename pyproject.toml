@@ -18,7 +18,9 @@ dependencies = [
     "tabulate",
     "python-magic",
     "httpx",
-    "httpx[http2]"
+    "httpx[http2]",
+    "vncdotool",
+    "pytest-mock"
 ]
 dynamic = ["version"]
 

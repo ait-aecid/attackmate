@@ -29,6 +29,7 @@ from .father import FatherCommand
 from .tempfile import TempfileCommand
 from .debug import DebugCommand
 from .regex import RegExCommand
+from .vnc import VncCommand
 from .json import JsonCommand
 
 Command = Union[
@@ -62,6 +63,7 @@ Command = Union[
     SliverSessionTERMINATECommand,
     SliverHttpsListenerCommand,
     SliverGenerateCommand,
+    VncCommand,
 ]
 
 

@@ -229,4 +229,5 @@ The next pages will describe all possible commands in detail.
    sliver
    sliver-session
    ssh
+   vnc
    webserv
